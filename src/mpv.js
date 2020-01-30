@@ -5,15 +5,16 @@ exports.MPV = class {
   constructor() {
     this.socket = new net.Socket();
     this.emitter = new events.EventEmitter();
+    this.requestId = 0;
     this.socket.setEncoding('utf8');
     this.socket.on('data', (data) => {
       const lines = data.split('\n').filter((s) => {
         return s.length > 0;
       });
       lines.forEach((line) => {
-        const obj = JSON.parse(line);
-        if ('event' in obj)
-          this.emitter.emit(obj['event']);
+        const event = JSON.parse(line)['event'];
+        if (event)
+          this.emitter.emit(event);
       });
     });
   }
@@ -25,8 +26,25 @@ exports.MPV = class {
   }
 
   send(command) {
+    const id = this.requestId++;
     return new Promise((resolve, _) => {
-      this.socket.write(JSON.stringify({command: command}) + '\n', resolve);
+      const recv = (data) => {
+        const lines = data.split('\n').filter((s) => {
+          return s.length > 0;
+        });
+        lines.forEach((line) => {
+          const obj = JSON.parse(line);
+          if (obj['request_id'] === id) {
+            resolve(obj['data']);
+            this.socket.removeListener('data', recv);
+          }
+        });
+      };
+      this.socket.on('data', recv);
+      this.socket.write(JSON.stringify({
+        command: command,
+        request_id: id
+      }) + '\n');
     });
   }
 
@@ -44,6 +62,10 @@ exports.MPV = class {
 
   stop() {
     return this.send(['stop']);
+  }
+
+  get_volume(volume) {
+    return this.send(['get_property', 'volume']);
   }
 
   set_volume(volume) {
