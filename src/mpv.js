@@ -1,8 +1,21 @@
 const net = require('net');
+const events = require('events');
 
 exports.MPV = class {
   constructor() {
-    this.socket = net.Socket();
+    this.socket = new net.Socket();
+    this.emitter = new events.EventEmitter();
+    this.socket.setEncoding('utf8');
+    this.socket.on('data', (data) => {
+      const lines = data.split('\n').filter((s) => {
+        return s.length > 0;
+      });
+      lines.forEach((line) => {
+        const obj = JSON.parse(line);
+        if ('event' in obj)
+          this.emitter.emit(obj['event']);
+      });
+    });
   }
 
   connect(addr, port) {
@@ -39,5 +52,9 @@ exports.MPV = class {
 
   close() {
     this.socket.destroy();
+  }
+
+  on(event, listener) {
+    this.emitter.on(event, listener);
   }
 };
