@@ -33,8 +33,11 @@ exports.MediaQueue = class {
   remove(username, id) {
     for (var i = 0; i < this.que.length; ++i)
       if (this.que[i]['username'] === username) {
-        if (this.que[i]['queue'].length > id)
+        if (this.que[i]['queue'].length > id) {
           this.que[i]['queue'].splice(id, 1);
+          if (this.que[i]['queue'].length === 0)
+            this.que.splice(i, 1);
+        }
         return;
       }
   }
