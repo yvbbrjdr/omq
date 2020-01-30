@@ -1,6 +1,7 @@
-const mq = require('./mediaqueue');
-const mpv = require('./mpv');
 const events = require('events');
+
+const mpv = require('./mpv');
+const mq = require('./mediaqueue');
 
 exports.OCFMediaQueue = class {
   constructor() {
