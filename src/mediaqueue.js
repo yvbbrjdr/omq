@@ -8,7 +8,7 @@ exports.MediaQueue = class {
   async push(username, query, video) {
     const info = await youtube.query(query);
     info['video'] = video;
-    for (const i = 0; i < this.que.length; ++i)
+    for (var i = 0; i < this.que.length; ++i)
       if (this.que[i]['username'] === username) {
         this.que[i]['queue'].push(info);
         return;
@@ -28,6 +28,15 @@ exports.MediaQueue = class {
     if (q['queue'].length > 0)
       this.que.push(q);
     return ret;
+  }
+
+  remove(username, id) {
+    for (var i = 0; i < this.que.length; ++i)
+      if (this.que[i]['username'] === username) {
+        if (this.que[i]['queue'].length > id)
+          this.que[i]['queue'].splice(id, 1);
+        return;
+      }
   }
 
   getQueue() {

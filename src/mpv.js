@@ -64,11 +64,11 @@ exports.MPV = class {
     return this.send(['stop']);
   }
 
-  get_volume(volume) {
+  getVolume() {
     return this.send(['get_property', 'volume']);
   }
 
-  set_volume(volume) {
+  setVolume(volume) {
     return this.send(['set_property', 'volume', volume]);
   }
 
