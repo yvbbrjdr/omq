@@ -8,4 +8,4 @@ exports.config = {
   ],
   wsAddr: '127.0.0.1',
   wsPort: 10080
-}
+};

@@ -6,4 +6,4 @@ exports.config = {
   wsPort: 10080,
   mpvAddr: '127.0.0.1',
   mpvPort: 10678
-}
+};
