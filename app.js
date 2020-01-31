@@ -1,4 +1,4 @@
-const omq = require('./omq');
+const omq = require('./src/omq');
 
 // mpv --idle --fullscreen --input-ipc-server=/tmp/mpvsock
 // socat unix-connect:/tmp/mpvsock tcp-listen:12345,fork,reuseaddr

@@ -2,7 +2,7 @@
   "name": "omq",
   "version": "0.1.0",
   "description": "OCF Media Queue",
-  "main": "src/index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
