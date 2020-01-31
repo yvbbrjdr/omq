@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/yvbbrjdr/omq#readme",
   "dependencies": {
+    "irc": "^0.5.2",
     "ws": "^7.2.1",
     "youtube-dl": "^3.0.1"
   }
