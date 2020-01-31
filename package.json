@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "OCF Media Queue",
   "scripts": {
+    "client": "node client/app.js",
     "server": "node server/app.js"
   },
   "repository": {
