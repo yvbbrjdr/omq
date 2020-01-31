@@ -40,6 +40,12 @@ exports.Service = class {
                 this.sendVolume(client, comm[1]);
             });
             break;
+          case 'getState':
+            this.sendState(client);
+            break;
+          case 'getVolume':
+            this.sendVolume(client);
+            break;
         }
       });
       await this.sendState(client);
