@@ -4,7 +4,7 @@
   "description": "OCF Media Queue",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "server": "node server/app.js"
   },
   "repository": {
     "type": "git",
