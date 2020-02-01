@@ -3,9 +3,7 @@ exports.config = {
   ircPort: 6667,
   ircSecure: false,
   ircNick: 'omqbot',
-  ircChannels: [
-    '#omq'
-  ],
+  ircChannel: '#omq',
   wsAddr: '127.0.0.1',
   wsPort: 10080
 };
